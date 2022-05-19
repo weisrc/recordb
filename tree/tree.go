@@ -5,28 +5,31 @@ import (
 	"strings"
 )
 
-type Tree struct {
+type Tree[T any] struct {
+	Value    T
+	Wild     bool
+	leaf     bool
 	segment  string
-	wild     bool
-	Value    string
-	children [38]*Tree
-	parent   *Tree
+	count    byte
+	children [38]*Tree[T]
+	parent   *Tree[T]
 }
 
-func New(path string, value string, wild bool) *Tree {
-	t := Empty(path)
+func New[T any](key string, value T, wild bool) *Tree[T] {
+	t := Empty[T](key)
 	t.Value = value
-	t.wild = wild
+	t.Wild = wild
+	t.leaf = true
 	return t
 }
 
-func Empty(path string) *Tree {
-	t := new(Tree)
-	t.segment = path
+func Empty[T any](key string) *Tree[T] {
+	t := new(Tree[T])
+	t.segment = key
 	return t
 }
 
-func (t *Tree) Path() string {
+func (t *Tree[T]) Path() string {
 	var sb strings.Builder
 	for {
 		sb.WriteString(t.segment)
@@ -37,15 +40,7 @@ func (t *Tree) Path() string {
 	return sb.String()
 }
 
-func (t *Tree) Remove(path string) *Tree {
-	if node := t.Get(path); node != nil {
-		node.parent.children[node.id()] = nil
-		return node
-	}
-	return nil
-}
-
-func (t *Tree) PrettyPrint(tab int) {
+func (t *Tree[T]) PrettyPrint(tab int) {
 	fmt.Printf("%s- %s\n", strings.Repeat("  ", tab), t.segment)
 	for _, v := range t.children {
 		if v != nil {

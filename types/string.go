@@ -1,8 +1,8 @@
-package code
+package types
 
-func String(code uint) string {
-	switch code {
-	case 0:
+func String(id uint16) string {
+	switch id {
+	case 32_768:
 		return "TA"
 	case 1:
 		return "A"
@@ -110,7 +110,7 @@ func String(code uint) string {
 		return "TLSA"
 	case 53:
 		return "SMIMEA"
-	case 54:
+	case 32_769:
 		return "DLV"
 	case 55:
 		return "HIP"
@@ -134,47 +134,47 @@ func String(code uint) string {
 		return "SVCB"
 	case 65:
 		return "HTTPS"
-	case 66:
+	case 99:
 		return "SPF"
-	case 67:
+	case 100:
 		return "UINFO"
-	case 68:
+	case 101:
 		return "UID"
-	case 69:
+	case 102:
 		return "GID"
-	case 70:
+	case 103:
 		return "UNSPEC"
-	case 71:
+	case 104:
 		return "NID"
-	case 72:
+	case 105:
 		return "L32"
-	case 73:
+	case 106:
 		return "L64"
-	case 74:
+	case 107:
 		return "LP"
-	case 75:
+	case 108:
 		return "EUI48"
-	case 76:
+	case 109:
 		return "EUI64"
-	case 77:
+	case 249:
 		return "TKEY"
-	case 78:
+	case 250:
 		return "TSIG"
-	case 79:
+	case 251:
 		return "IXFR"
-	case 80:
+	case 252:
 		return "AXFR"
-	case 81:
+	case 253:
 		return "MAILB"
-	case 82:
+	case 254:
 		return "MAILA"
-	case 83:
+	case 255:
 		return "ALL"
-	case 84:
+	case 256:
 		return "URI"
-	case 85:
+	case 257:
 		return "CAA"
-	case 86:
+	case 259:
 		return "DOA"
 	default:
 		return "???"

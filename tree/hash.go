@@ -1,6 +1,7 @@
 package tree
 
-func compress(char byte) byte {
+// range reduction byte [0, 255] -> domain name character [0, 37], custom hash function
+func hash(char byte) byte {
 	if char >= 97 && char <= 122 {
 		return char - 97
 	} else if char == 46 {

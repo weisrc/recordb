@@ -7,14 +7,14 @@ import (
 )
 
 func TestFind(t *testing.T) {
-	root := tree.Empty("google.com.")
-	root.Set("google.ca.", "hello", true)
-	root.Set("d.google.ca.", "nope", true)
+	root := tree.Empty[string]("google.com.")
+	root.Set("google.ca.", "asdf", true)
+	root.Set("d.google.ca.", "asdf", true)
 	root.PrettyPrint(0)
-	got := root.Find("ad.google.ca.")
-	if got == nil {
+	got, ok := root.Get("ad.google.ca.", true)
+	if !ok {
 		t.Error(`expected node but got nil`)
-	} else if got.Value != "hello" {
-		t.Errorf(`want "hello", got %q`, got.Value)
+	} else if got != "hello" {
+		t.Errorf(`want "hello", got %q`, got)
 	}
 }
