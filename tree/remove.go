@@ -8,7 +8,7 @@ func (t *Tree[T]) Remove(key string) *Tree[T] {
 			if !parent.leaf && parent.count == 1 {
 				for _, node2 := range parent.children {
 					if node2 != nil {
-						parent.segment += node2.segment
+						node2.segment += parent.segment
 						parent.swap(node2)
 						break
 					}

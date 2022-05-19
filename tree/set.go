@@ -1,7 +1,7 @@
 package tree
 
 func (t *Tree[T]) Set(key string, value T, wild bool) {
-	node := t.set(key, len(key))
+	node := t.set(key, len(key)) // TODO: normalize key input for all
 	node.Value = value
 	node.Wild = wild
 	node.leaf = true
@@ -65,8 +65,11 @@ func (t *Tree[T]) set(key string, bound int) *Tree[T] {
 		if node := t.children[hash(key[j-1])]; node != nil {
 			return node.set(key, j)
 		}
+		if t.count == 0 && !t.leaf {
+			t.segment += key[:j]
+			return t
+		}
 		return t.Append(Empty[T](key[:j]))
-
 	}
 	return t.fork(i, key[:j])
 }

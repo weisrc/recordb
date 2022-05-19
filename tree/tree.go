@@ -1,7 +1,6 @@
 package tree
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -23,8 +22,12 @@ func New[T any](key string, value T, wild bool) *Tree[T] {
 	return t
 }
 
+func Root[T any]() *Tree[T] {
+	return new(Tree[T])
+}
+
 func Empty[T any](key string) *Tree[T] {
-	t := new(Tree[T])
+	t := Root[T]()
 	t.segment = key
 	return t
 }
@@ -38,13 +41,4 @@ func (t *Tree[T]) Path() string {
 		}
 	}
 	return sb.String()
-}
-
-func (t *Tree[T]) PrettyPrint(tab int) {
-	fmt.Printf("%s- %s\n", strings.Repeat("  ", tab), t.segment)
-	for _, v := range t.children {
-		if v != nil {
-			v.PrettyPrint(tab + 1)
-		}
-	}
 }
