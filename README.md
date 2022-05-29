@@ -1,6 +1,6 @@
 # RecorDB
 
-Go DNS record in memory database for fast record retrieval.
+Go DNS record in-memory database for fast record retrieval.
 
 - First label wildcards
 - Add and remove records
