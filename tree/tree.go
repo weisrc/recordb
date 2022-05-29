@@ -1,9 +1,5 @@
 package tree
 
-import (
-	"strings"
-)
-
 type Tree[T any] struct {
 	Value    T
 	Wild     bool
@@ -30,15 +26,4 @@ func Empty[T any](key string) *Tree[T] {
 	t := Root[T]()
 	t.segment = key
 	return t
-}
-
-func (t *Tree[T]) Path() string {
-	var sb strings.Builder
-	for {
-		sb.WriteString(t.segment)
-		if t = t.parent; t == nil {
-			break
-		}
-	}
-	return sb.String()
 }

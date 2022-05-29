@@ -27,12 +27,12 @@ func TestDB(t *testing.T) {
 	if got, ok := db.Get(types.A, "google.com.", false); !ok || got.Value != "hello" {
 		t.Errorf("something went wrong")
 	}
-	for v := db.List("google.com."); v != nil; v = v.Next {
+	for v := db.All("google.com."); v != nil; v = v.Next {
 		println(types.String(v.Type))
 	}
 	println("==========================")
 	db.Remove(types.CNAME, "google.com.")
-	for v := db.List("google.com."); v != nil; v = v.Next {
+	for v := db.All("google.com."); v != nil; v = v.Next {
 		println(types.String(v.Type))
 	}
 }

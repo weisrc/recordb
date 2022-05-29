@@ -20,7 +20,7 @@ func (t *Tree[T]) string(sb *strings.Builder, tab int) {
 	if t.Wild {
 		wild = "*"
 	}
-	sb.WriteString(fmt.Sprintf("%s%s%s%s\n", strings.Repeat("|", tab), t.segment, leaf, wild))
+	sb.WriteString(fmt.Sprintf("%s%s%s%s\n", strings.Repeat("|", tab), Unhash(t.segment), leaf, wild))
 	for _, v := range t.children {
 		if v != nil {
 			v.string(sb, tab+1)

@@ -7,18 +7,18 @@ import (
 	"github.com/weisrc/recordb/tree"
 )
 
-const N = 100000
-const I = 100
+const N = 1000000
+const I = 1000000
 
 func BenchmarkTree(b *testing.B) {
 
 	v, _ := uuid.NewRandom()
-	s := v.String()
+	s := tree.Hash(v.String())
 	root := tree.New(s, "asdf", false)
 
 	for i := 0; i < N; i++ {
 		v, _ := uuid.NewRandom()
-		root.Set(v.String(), "asdf", false)
+		root.Set(tree.Hash(v.String()), "asdf", false)
 	}
 
 	b.ResetTimer()

@@ -23,7 +23,7 @@ func (t *Tree[T]) swap(node *Tree[T]) *Tree[T] {
 }
 
 func (t *Tree[T]) id() byte {
-	return hash(t.segment[len(t.segment)-1])
+	return t.segment[len(t.segment)-1]
 }
 
 func (t *Tree[T]) fork(at int, insert string) *Tree[T] {
@@ -62,7 +62,7 @@ func (t *Tree[T]) set(key string, bound int) *Tree[T] {
 
 	} else if i == 0 {
 		// fmt.Printf("	path[j-1]=%q Translate(path[j-1])=%d\n", path[j-1], Translate(path[j-1]))
-		if node := t.children[hash(key[j-1])]; node != nil {
+		if node := t.children[key[j-1]]; node != nil {
 			return node.set(key, j)
 		}
 		if t.count == 0 && !t.leaf {

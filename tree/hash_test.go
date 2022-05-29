@@ -8,14 +8,14 @@ import (
 
 func TestHashCaseInsentivity(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("a.example.com.", 0, true)
-	root.Set("b.example.com.", 0, true)
-	root.Set("c.example.com.", 0, true)
-	root.Set("C.example.com.", 0, true)
+	root.Set(tree.Hash("a.example.com."), 0, true)
+	root.Set(tree.Hash("b.example.com."), 0, true)
+	root.Set(tree.Hash("c.example.com."), 0, true)
+	root.Set(tree.Hash("C.example.com."), 0, true)
 	Assert(t, root, `
 	.example.com.
     |a!*
     |b!*
-    |C!*
+    |c!*
 	`)
 }

@@ -16,7 +16,7 @@ func (t *Tree[T]) Remove(key string) *Tree[T] {
 			}
 			return node
 		} else {
-			empty := Empty[T]("")
+			empty := Root[T]()
 			empty.swap(t)
 			return empty
 		}

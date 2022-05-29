@@ -22,7 +22,7 @@ func (t *Tree[T]) get(key string, bound int, wild bool, found *Tree[T]) *Tree[T]
 		if wild && t.Wild {
 			found = t
 		}
-		if node := t.children[hash(key[j-1])]; node != nil {
+		if node := t.children[key[j-1]]; node != nil {
 
 			return node.get(key, j, wild, found)
 		}

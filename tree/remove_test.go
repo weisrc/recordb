@@ -8,10 +8,10 @@ import (
 
 func TestRemoveBasic(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("a.example.com.", 0, true)
-	root.Set("b.example.com.", 0, true)
-	root.Set("c.example.com.", 0, true)
-	root.Remove("b.example.com.")
+	root.Set(tree.Hash("a.example.com."), 0, true)
+	root.Set(tree.Hash("b.example.com."), 0, true)
+	root.Set(tree.Hash("c.example.com."), 0, true)
+	root.Remove(tree.Hash("b.example.com."))
 	Assert(t, root, `
 	.example.com.
     |a!*
@@ -21,23 +21,23 @@ func TestRemoveBasic(t *testing.T) {
 
 func TestRemoveRoot(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("example.com.", 0, true)
-	root.Remove("example.com.")
+	root.Set(tree.Hash("example.com."), 0, true)
+	root.Remove(tree.Hash("example.com."))
 	Assert(t, root, "")
 }
 
 func TestRemoveInexistent(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("example.com.", 0, true)
-	root.Remove("a.example.com.")
+	root.Set(tree.Hash("example.com."), 0, true)
+	root.Remove(tree.Hash("a.example.com."))
 	Assert(t, root, "example.com.!*")
 }
 
 func TestRemoveMerge(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("a.example.com.", 0, true)
-	root.Set("b.example.com.", 0, true)
-	root.Remove("b.example.com.")
+	root.Set(tree.Hash("a.example.com."), 0, true)
+	root.Set(tree.Hash("b.example.com."), 0, true)
+	root.Remove(tree.Hash("b.example.com."))
 	Assert(t, root, `
 	a.example.com.!*
 	`)
@@ -45,10 +45,10 @@ func TestRemoveMerge(t *testing.T) {
 
 func TestRemoveMergeNegative(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("a.example.com.", 0, true)
-	root.Set("b.example.com.", 0, true)
-	root.Set("c.example.com.", 0, true)
-	root.Remove("c.example.com.")
+	root.Set(tree.Hash("a.example.com."), 0, true)
+	root.Set(tree.Hash("b.example.com."), 0, true)
+	root.Set(tree.Hash("c.example.com."), 0, true)
+	root.Remove(tree.Hash("c.example.com."))
 	Assert(t, root, `
 	.example.com.
 	|a!*

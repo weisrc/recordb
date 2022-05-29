@@ -8,9 +8,9 @@ import (
 
 func TestSetMerge(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("a.example.com.", 0, true)
-	root.Set("b.example.com.", 0, true)
-	root.Set("c.example.com.", 0, true)
+	root.Set(tree.Hash("a.example.com."), 0, true)
+	root.Set(tree.Hash("b.example.com."), 0, true)
+	root.Set(tree.Hash("c.example.com."), 0, true)
 	Assert(t, root, `
 	.example.com.
     |a!*
@@ -21,8 +21,8 @@ func TestSetMerge(t *testing.T) {
 
 func TestSetFork(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("example.com.", 0, true)
-	root.Set("com.", 0, true)
+	root.Set(tree.Hash("example.com."), 0, true)
+	root.Set(tree.Hash("com."), 0, true)
 	Assert(t, root, `
 	com.!*
     |example.!*
@@ -31,8 +31,8 @@ func TestSetFork(t *testing.T) {
 
 func TestSetExact(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("example.com.", 0, true)
-	root.Set("example.com.", 0, true)
+	root.Set(tree.Hash("example.com."), 0, true)
+	root.Set(tree.Hash("example.com."), 0, true)
 	Assert(t, root, `
 	example.com.!*
 	`)
@@ -40,9 +40,9 @@ func TestSetExact(t *testing.T) {
 
 func TestSetExtend(t *testing.T) {
 	root := tree.Root[int]()
-	root.Set("example.com.", 0, true)
-	root.Set("a.example.com.", 0, true)
-	root.Set("aa.example.com.", 0, true)
+	root.Set(tree.Hash("example.com."), 0, true)
+	root.Set(tree.Hash("a.example.com."), 0, true)
+	root.Set(tree.Hash("aa.example.com."), 0, true)
 	Assert(t, root, `
 	example.com.!*
 	|a.!*
