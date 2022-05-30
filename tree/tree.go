@@ -1,5 +1,7 @@
 package tree
 
+import "sync"
+
 type Tree[T any] struct {
 	Value    T
 	Wild     bool
@@ -8,6 +10,7 @@ type Tree[T any] struct {
 	count    byte
 	children [38]*Tree[T]
 	parent   *Tree[T]
+	mutex    sync.Mutex
 }
 
 func New[T any](key string, value T, wild bool) *Tree[T] {

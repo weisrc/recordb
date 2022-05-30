@@ -61,3 +61,13 @@ func (db *DB) Add(value Record) {
 func (db *DB) All(name string) *Record {
 	return db.heads[tree.Hash(name)]
 }
+
+func (db *DB) RemoveExpired(now uint) {
+	for _, record := range db.heads {
+		for ; record != nil; record = record.Next {
+			if now-record.Iat > record.Ttl {
+				db.Remove(record.Type, record.Name)
+			}
+		}
+	}
+}
